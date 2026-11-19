@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEBELIZE | Jasa Desain 3D AutoCAD Kusen, Plafon &amp; Mebel Aluminium Presisi</title>
+  <meta name="description" content="Jasa pembuatan desain 3D AutoCAD dan gambar kerja 2D shop drawing kusen jendela, pintu sliding/lipat, plafon PVC/aluminium, kitchen set, dan partisi aluminium presisi milimeter untuk bengkel & proyek.">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cad: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+              950: '#082f49'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Three.js & OrbitControls via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body class="bg-blueprint-grid text-slate-100 antialiased selection:bg-sky-500 selection:text-white min-h-screen flex flex-col">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-sky-900/90 via-blue-900/90 to-slate-900/90 border-b border-sky-500/20 py-2 px-4 text-center text-xs sm:text-sm text-sky-200 flex items-center justify-center gap-2">
+    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+    <span class="font-medium">Layanan Aktif:</span>
+    <span>Terima pesanan Desain 3D AutoCAD &amp; Shop Drawing untuk proyek perumahan, ruko, dan bengkel aluminium di seluruh Indonesia.</span>
+  </div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-sky-500/20 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Brand Logo -->
+        <a href="#beranda" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-slate-900 rounded-xl border border-sky-500/40 p-1 group-hover:border-sky-400 transition-colors shadow-lg shadow-sky-950">
+            <img src="assets/logo.svg" alt="MEBELIZE Logo" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <span class="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center">
+              MEBEL<span class="text-sky-400">IZE</span>
+              <span class="ml-1 text-[10px] font-mono-cad text-sky-300 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-500/30">STUDIO</span>
+            </span>
+            <span class="block text-[10px] sm:text-[11px] font-medium text-slate-400 tracking-wider">
+              3D AUTOCAD &amp; ALUMINUM DESIGN
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+          <a href="#beranda" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Beranda</a>
+          <a href="#tentang-toko" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Latar Belakang</a>
+          <a href="#cad-preview" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            Simulasi 3D
+          </a>
+          <a href="#kitchen-studio" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Studio Kitchen</a>
+          <a href="#layanan" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Layanan</a>
+          <a href="#portofolio" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Portofolio</a>
+          <a href="#paket-harga" class="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Harga</a>
+        </nav>
+
+        <!-- Theme Switcher & CTA Action Button -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Custom Light / Dark Theme Toggle -->
+          <button
+            id="btn-theme-toggle"
+            type="button"
+            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-sky-400 text-xs font-mono-cad font-semibold transition-all shadow-sm"
+            title="Ubah Tema Terang / Gelap"
+          >
+            <span id="theme-icon">☀️</span>
+            <span id="theme-label" class="hidden sm:inline">Mode Terang</span>
+          </button>
+
+          <a href="#pemesanan" class="hidden sm:inline-flex relative group items-center gap-2 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-sky-600/30 transition-all duration-200">
+            <span>Pesan Desain</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+
+          <!-- Mobile Hamburger Button -->
+          <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none" aria-label="Toggle Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden pb-4 pt-2 border-t border-slate-800 space-y-1">
+        <a href="#beranda" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Beranda</a>
+        <a href="#tentang-toko" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Latar Belakang Toko</a>
+        <a href="#cad-preview" class="block px-3 py-2 rounded-lg text-base font-medium text-sky-400 hover:bg-slate-800">Simulasi 3D CAD</a>
+        <a href="#kitchen-studio" class="block px-3 py-2 rounded-lg text-base font-medium text-emerald-400 hover:bg-slate-800">Studio Kitchen Set 3D</a>
+        <a href="#layanan" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Layanan Spesialis</a>
+        <a href="#portofolio" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Katalog Desain</a>
+        <a href="#paket-harga" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">Paket &amp; Biaya</a>
+        <a href="#pemesanan" class="block px-3 py-2 rounded-lg text-base font-medium text-sky-300 bg-sky-950/50 border border-sky-500/30">Form Pemesanan Desain</a>
+        <a href="#faq" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">FAQ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- HERO SECTION -->
+    <section id="beranda" class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden bg-blueprint-subtle">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Copywriter -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Technical Tag Badges -->
+            <div class="inline-flex flex-wrap items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-mono-cad font-medium bg-sky-950/80 text-sky-300 border border-sky-500/40 shadow-inner">
+                <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                AUTOCAD 3D &amp; 2D DRAFTING
+              </span>
+              <span class="py-1 px-3 rounded-full text-xs font-mono-cad font-medium bg-slate-900 text-slate-300 border border-slate-700">
+                Akurasi Fabrikasi 100%
+              </span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              Jasa Desain 3D AutoCAD <br class="hidden sm:inline">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-500">
+                Kusen, Plafon &amp; Mebel Aluminium
+              </span>
+              <br>Presisi Milimeter.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+              Tingkatkan kualitas proyek Anda dengan gambar kerja AutoCAD (DWG) siap fabrikasi dan visualisasi 3D realistis. 
+              Mencegah salah potong bahan profil aluminium, menghemat biaya material, dan memberikan gambaran visual nyata sebelum proses produksi fisik dimulai.
+            </p>
+
+            <!-- Call To Actions -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <a href="#pemesanan" class="inline-flex justify-center items-center gap-3 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold px-6 py-3.5 rounded-xl shadow-xl shadow-sky-600/30 transition-all text-sm sm:text-base group">
+                <span>Pesan Desain Sekarang</span>
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              </a>
+
+              <a href="#cad-preview" class="inline-flex justify-center items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-sky-500 font-semibold px-6 py-3.5 rounded-xl transition-all text-sm sm:text-base">
+                <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Coba Simulasi 3D</span>
+              </a>
+            </div>
+
+            <!-- Highlights Specs -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
+              <div>
+                <span class="block text-2xl font-black text-sky-400 font-mono-cad">0.1 mm</span>
+                <span class="text-xs text-slate-400">Toleransi Ukuran</span>
+              </div>
+              <div>
+                <span class="block text-2xl font-black text-white font-mono-cad">DWG+PDF</span>
+                <span class="text-xs text-slate-400">Format Fabrikasi</span>
+              </div>
+              <div>
+                <span class="block text-2xl font-black text-cyan-400 font-mono-cad">24 Jam</span>
+                <span class="text-xs text-slate-400">Opsi Fast-Track</span>
+              </div>
+              <div>
+                <span class="block text-2xl font-black text-amber-400 font-mono-cad">-30%</span>
+                <span class="text-xs text-slate-400">Hemat Limbah Bahan</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Graphic / Blueprint Preview Card -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <div class="absolute -inset-1.5 bg-gradient-to-r from-sky-500 to-blue-600 rounded-2xl blur-xl opacity-30 animate-pulse-subtle"></div>
+              
+              <div class="relative glass-panel rounded-2xl p-5 border border-sky-500/30 cad-corner-box shadow-2xl">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-xs font-mono-cad text-slate-400">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                    <span class="ml-2 text-slate-300 font-medium">KUSEN_CASEMENT_REV3.dwg</span>
+                  </div>
+                  <span class="text-sky-400">SCALE 1:20</span>
+                </div>
+
+                <div class="relative bg-slate-950/80 rounded-xl overflow-hidden p-4 border border-slate-800">
+                  <img 
+                    src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" 
+                    alt="AutoCAD Blueprint Design" 
+                    class="w-full h-64 object-cover rounded-lg filter contrast-125 brightness-90 opacity-80"
+                  />
+                  
+                  <div class="absolute top-8 left-8 bg-slate-900/90 border border-sky-400/50 text-sky-300 font-mono-cad text-xs px-2.5 py-1 rounded shadow">
+                    W: 1400 mm
+                  </div>
+                  <div class="absolute bottom-8 right-8 bg-slate-900/90 border border-amber-400/50 text-amber-300 font-mono-cad text-xs px-2.5 py-1 rounded shadow">
+                    H: 1600 mm
+                  </div>
+                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-sky-950/90 border border-sky-400 text-white font-mono-cad text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Profil Alexindo 4" Hitam Doff
+                  </div>
+
+                  <div class="cad-scanline"></div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Lengkap dengan Detail Potongan 45°</span>
+                  </div>
+                  <span class="font-mono-cad text-sky-400">Siap Fabrikasi</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: LATAR BELAKANG & PROFIL TOKO MEBEL ALUMINIUM -->
+    <section id="tentang-toko" class="py-20 bg-slate-950/60 border-y border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+            Tentang Studio &amp; Workshop Kami
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Menghadirkan Presisi Rekayasa CAD <br class="hidden sm:inline">
+            ke Dunia Mebel, Plafon &amp; Kusen Aluminium
+          </h2>
+          <div class="w-20 h-1 bg-gradient-to-r from-sky-500 to-cyan-400 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5 space-y-4">
+            <div class="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group">
+              <img 
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" 
+                alt="Workshop Fabrikasi Aluminium & CAD Engineering" 
+                class="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl glass-panel border border-sky-500/30">
+                <p class="text-xs font-mono-cad text-sky-300 font-semibold mb-1">PENGALAMAN BENGKEL &amp; DESAIN</p>
+                <p class="text-xs text-slate-300">Menguasai karakter profil Alexindo, YKK, Dacon, hingga sistem bukaan hardware Eropa.</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="glass-panel p-4 rounded-xl border border-slate-800">
+                <span class="block text-2xl font-black text-sky-400 font-mono-cad">8+ Tahun</span>
+                <span class="text-xs text-slate-400">Pengalaman di Bidang Aluminium &amp; Desain CAD</span>
+              </div>
+              <div class="glass-panel p-4 rounded-xl border border-slate-800">
+                <span class="block text-2xl font-black text-cyan-400 font-mono-cad">1.200+</span>
+                <span class="text-xs text-slate-400">Opening Kusen &amp; Mebel Telah Tergambar</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-6">
+            <h3 class="text-xl sm:text-2xl font-bold text-white">
+              Mengapa Desain 3D AutoCAD Sangat Krusial untuk Mebel &amp; Kusen Aluminium?
+            </h3>
+            
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Toko mebel dan workshop aluminium kami berawal dari pengalaman langsung di lapangan fabrikasi. 
+              Seringkali bengkel maupun pemilik rumah mengalami kerugian akibat <strong class="text-sky-300">salah potong profil aluminium</strong>, 
+              kusen tidak pas dengan opening lubang dinding bata/plesteran, atau sisa batang profil yang terbuang sia-sia karena tidak adanya rencana potong yang optimal.
+            </p>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Oleh karena itu, <strong class="text-white">MEBELIZE</strong> hadir sebagai penyedia layanan profesional yang menggabungkan 
+              <strong class="text-sky-400">keahlian rekayasa AutoCAD (2D &amp; 3D)</strong> dengan <strong class="text-sky-400">standar teknis fabrikasi aluminium</strong>. 
+              Kami tidak sekadar menggambar visual indah, namun menghasilkan gambar kerja teknis (shop drawing) yang benar-benar siap dipotong dan dirakit oleh tukang las/aluminium di bengkel.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="p-2 rounded-lg bg-sky-950 text-sky-400 border border-sky-500/30 shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-white mb-0.5">Zero Error Potong</h4>
+                  <p class="text-xs text-slate-400">Setiap toleransi celah sponeng, kaca, dan sealant dihitung presisi skala milimeter.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="p-2 rounded-lg bg-cyan-950 text-cyan-400 border border-cyan-500/30 shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-white mb-0.5">Optimasi Cutting List</h4>
+                  <p class="text-xs text-slate-400">Rencana potong batang profil panjang 6 meter agar efisien dan menghemat modal bahan.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="p-2 rounded-lg bg-blue-950 text-blue-400 border border-blue-500/30 shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-white mb-0.5">Visual 3D Menawan</h4>
+                  <p class="text-xs text-slate-400">Beri impresi meyakinkan pada klien/keluarga dengan render 3D warna profil realistis.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="p-2 rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-white mb-0.5">File Master Komplit</h4>
+                  <p class="text-xs text-slate-400">Mendapatkan file mentah DWG, DXF, PDF siap cetak skala kerja, dan file visual 3D.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gradient-to-r from-sky-950/40 via-slate-900/60 to-slate-950 border border-sky-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="text-xs text-slate-300">
+                <strong class="text-white block font-medium">Melayani Seluruh Indonesia</strong>
+                Pengiriman berkas desain instan via Cloud Drive &amp; WhatsApp, konsultasi online responsif.
+              </div>
+              <a href="#pemesanan" class="shrink-0 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold transition-colors">
+                Konsultasikan Proyek &rarr;
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE 3D CAD BLUEPRINT VIEWER -->
+    <section id="cad-preview" class="py-20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-xs font-mono-cad text-cyan-400 uppercase tracking-widest bg-cyan-950/70 border border-cyan-500/30 px-3 py-1 rounded-full">
+            Simulasi Interaktif Tiga Dimensi
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Eksplorasi Desain 3D CAD &amp; Blueprint
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Putar model 360°, perbesar detail profil aluminium, rangka plafon hollow, dan uji coba mode wireframe CAD blueprint langsung di browser Anda.
+          </p>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-4 sm:p-6 border border-sky-500/30 shadow-2xl relative">
+          
+          <!-- Top Control Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-800">
+            
+            <!-- Model Switcher Buttons -->
+            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span class="text-xs text-slate-400 font-mono-cad hidden sm:inline mr-1">MODEL:</span>
+              <button data-cad-model="kusen" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white border border-sky-400 transition-all shadow">
+                Kusen Jendela 2 Daun
+              </button>
+              <button data-cad-model="pintu" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+                Pintu Sliding Modern
+              </button>
+              <button data-cad-model="plafon" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+                Custom Plafon Drop Ceiling
+              </button>
+              <a href="#kitchen-studio" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-950 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-900 transition-all">
+                Studio Kitchen Set 3D &darr;
+              </a>
+            </div>
+
+            <!-- View Modes Switcher -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <span class="text-xs text-slate-400 font-mono-cad hidden lg:inline mr-1">TAMPILAN:</span>
+              <button data-cad-mode="solid" class="px-2.5 py-1 rounded text-xs font-mono-cad border border-sky-400 text-sky-300 bg-slate-900">
+                Solid Realistis
+              </button>
+              <button data-cad-mode="wireframe" class="px-2.5 py-1 rounded text-xs font-mono-cad border border-slate-700 text-slate-400 hover:text-slate-200 bg-slate-900">
+                Wireframe Blueprint
+              </button>
+              <button data-cad-mode="xray" class="px-2.5 py-1 rounded text-xs font-mono-cad border border-slate-700 text-slate-400 hover:text-slate-200 bg-slate-900">
+                X-Ray Transparan
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Viewport 3D Canvas -->
+          <div id="cad-canvas-container" class="relative">
+            <div class="absolute top-4 left-4 z-10 pointer-events-none bg-slate-900/80 backdrop-blur border border-sky-500/30 px-3 py-2 rounded-lg text-[11px] font-mono-cad text-slate-300 shadow">
+              <div class="flex items-center gap-2 text-sky-400 font-bold mb-0.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                AUTODESK ENGINE SIMULATION
+              </div>
+              <p class="text-slate-400">Klik &amp; geser mouse / swipe untuk memutar. Scroll untuk zoom in/out.</p>
+            </div>
+
+            <div class="absolute top-4 right-4 z-10 flex flex-col gap-2">
+              <button id="btn-toggle-rotate" class="p-2 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-sky-400 text-xs shadow hover:scale-105 transition-all" title="Toggle Auto Rotate">
+                🔄 Putar Otomatis
+              </button>
+              <button id="btn-toggle-dimensions" class="p-2 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-sky-400 text-xs shadow hover:scale-105 transition-all" title="Toggle Dimension Lines">
+                📏 Garis Ukuran
+              </button>
+              <button id="btn-reset-cam" class="p-2 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white text-xs shadow hover:scale-105 transition-all" title="Reset Kamera">
+                ⟲ Reset Posisi
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Finish Color Switcher Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 mt-4 border-t border-slate-800 text-xs">
+            <div class="flex items-center gap-3">
+              <span class="text-slate-400 font-medium">Finishing Profil Aluminium:</span>
+              <div class="flex flex-wrap items-center gap-2">
+                <button data-cad-finish="silver" class="px-2.5 py-1 rounded bg-slate-300 text-slate-950 font-bold ring-2 ring-sky-400 text-[11px] flex items-center gap-1">
+                  <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-400 inline-block"></span>
+                  Anodize Silver
+                </button>
+                <button data-cad-finish="black" class="px-2.5 py-1 rounded bg-slate-900 text-slate-200 font-bold border border-slate-700 text-[11px] flex items-center gap-1">
+                  <span class="w-3 h-3 rounded-full bg-slate-950 border border-slate-600 inline-block"></span>
+                  Hitam Doff
+                </button>
+                <button data-cad-finish="white" class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 font-bold border border-slate-700 text-[11px] flex items-center gap-1">
+                  <span class="w-3 h-3 rounded-full bg-white inline-block"></span>
+                  Putih Coating
+                </button>
+                <button data-cad-finish="wood" class="px-2.5 py-1 rounded bg-amber-950 text-amber-200 font-bold border border-amber-800 text-[11px] flex items-center gap-1">
+                  <span class="w-3 h-3 rounded-full bg-amber-700 inline-block"></span>
+                  Urat Kayu
+                </button>
+              </div>
+            </div>
+
+            <a href="#pemesanan" class="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1">
+              <span>Pesan Desain dengan Model Seperti Ini</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2B: STUDIO KHUSUS KUSTOMISASI KITCHEN SET 3D -->
+    <section id="kitchen-studio" class="py-20 bg-slate-950/70 border-y border-sky-500/20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-xs font-mono-cad text-emerald-400 uppercase tracking-widest bg-emerald-950/70 border border-emerald-500/30 px-3 py-1 rounded-full">
+            Interactive 3D Kitchen Builder
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Studio Desain 3D Kitchen Set Aluminium
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Rancang sendiri tata letak dapur aluminium Anda—mulai dari bentuk kabinet, lemari atas/tinggi, meja island dengan jarak lorong ergonomis, kursi bar, hingga sink &amp; kompor.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+          <!-- KIRI: VIEWPORT 3D KITCHEN SET (7 KOLOM) -->
+          <div class="lg:col-span-7 glass-panel rounded-2xl p-4 border border-sky-500/30 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-xs font-mono-cad">
+              <span class="text-sky-400 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                3D KITCHEN CONFIGURATOR
+              </span>
+              <label class="flex items-center gap-2 text-slate-300 cursor-pointer">
+                <input type="checkbox" id="ks-wireframe" class="rounded text-sky-500">
+                <span>Mode Wireframe CAD</span>
+              </label>
+            </div>
+
+            <div id="kitchen-canvas-container" class="w-full h-[460px] sm:h-[520px] rounded-xl overflow-hidden border border-slate-800 relative">
+              <div class="absolute bottom-3 left-3 z-10 pointer-events-none bg-slate-900/85 px-3 py-1.5 rounded-lg border border-slate-700 text-[11px] font-mono-cad text-slate-300">
+                Geser mouse untuk memutar 360° • Scroll untuk Zoom detail lemari &amp; meja
+              </div>
+            </div>
+          </div>
+
+          <!-- KANAN: PANEL KONTROL KUSTOMISASI PELANGGAN (5 KOLOM) -->
+          <div class="lg:col-span-5 glass-panel rounded-2xl p-6 border border-sky-500/30 space-y-5">
+            <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">
+              Kustomisasi Komponen Kitchen Set
+            </h3>
+
+            <!-- 1. Bentuk Layout & Panjang -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">BENTUK LAYOUT</label>
+                <select id="ks-layout" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs">
+                  <option value="linear">Single Line (Lurus)</option>
+                  <option value="l-shape" selected>L-Shape (Sudut)</option>
+                  <option value="u-shape">U-Shape (Letter U)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">PANJANG UTAMA</label>
+                <select id="ks-length" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs font-mono-cad">
+                  <option value="180">180 cm (Compact)</option>
+                  <option value="240" selected>240 cm (Standar)</option>
+                  <option value="300">300 cm (Besar)</option>
+                  <option value="360">360 cm (Luas)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 2. Lemari Kabinet Atas & Lemari Tinggi -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">LEMARI KABINET ATAS</label>
+                <select id="ks-upper" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs">
+                  <option value="glass" selected>Pintu Kaca Aluminium</option>
+                  <option value="solid">Pintu Panel ACP Solid</option>
+                  <option value="none">Tanpa Kabinet Atas</option>
+                </select>
+              </div>
+              <div class="flex flex-col justify-end">
+                <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-900 border border-slate-700 cursor-pointer text-xs text-slate-200">
+                  <input type="checkbox" id="ks-tall" checked class="rounded text-sky-500">
+                  <span>Lemari Tinggi / Kulkas</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 3. Meja Island & Kursi Bar -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">MEJA ISLAND / BAR</label>
+                <select id="ks-island" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs">
+                  <option value="none">Tanpa Meja Island</option>
+                  <option value="island" selected>Meja Island Tengah</option>
+                  <option value="peninsula">Meja Bar Peninsula</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">JUMLAH KURSI BAR</label>
+                <select id="ks-chairs" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs font-mono-cad">
+                  <option value="0">0 Kursi</option>
+                  <option value="2" selected>2 Kursi Bar</option>
+                  <option value="3">3 Kursi Bar</option>
+                  <option value="4">4 Kursi Bar</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 4. Finishing Aluminium & Top Table -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">FINISHING ALUMINIUM</label>
+                <select id="ks-finish" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs">
+                  <option value="black" selected>Hitam Doff</option>
+                  <option value="silver">Anodize Silver</option>
+                  <option value="white">Putih Coating</option>
+                  <option value="wood">Urat Kayu</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono-cad text-sky-300 mb-1">TOP TABLE GRANIT</label>
+                <select id="ks-top" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs">
+                  <option value="nero" selected>Hitam Nero</option>
+                  <option value="carrara">Putih Carrara</option>
+                  <option value="concrete">Abu Beton</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 5. Sink & Kompor -->
+            <div>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/80 border border-slate-700 cursor-pointer text-xs text-slate-200">
+                <input type="checkbox" id="ks-appliances" checked class="rounded text-sky-500">
+                <span>Tampilkan Sink Cuci Piring, Kompor Tanam &amp; Cooker Hood</span>
+              </label>
+            </div>
+
+            <!-- Tombol Kirim Konfigurasi ke Form Pemesanan -->
+            <button id="btn-apply-kitchen-order" type="button" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-lg transition-all flex items-center justify-center gap-2">
+              <span>Gunakan Desain Kitchen Set Ini ke Form Pemesanan</span>
+              <span>&rarr;</span>
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: LAYANAN SPESIALIS KAMI -->
+    <section id="layanan" class="py-20 bg-slate-950/40 border-t border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+            Katalog Layanan
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Layanan Desain Spesialis Aluminium
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Mencakup segala kebutuhan hunian modern, ruko, gedung kantor, hingga fasilitas komersial.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-sky-950 text-sky-400 border border-sky-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                01
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Desain Kusen &amp; Jendela Aluminium</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Desain presisi jendela casement swing, sliding 2/3/4 daun, jendela pivot arsitektural, awning jungkit, hingga boven / kisi ventilasi udara.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Kusen 3 Inch &amp; 4 Inch</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Detail sponeng &amp; karet gasket EPDM</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Kaca mati kombinasi &amp; kisi louver</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Desain Kusen</span> &rarr;
+            </a>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-blue-950 text-blue-400 border border-blue-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                02
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Pintu Aluminium Berbagai Sistem</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Pintu geser (sliding door) bukaan lebar, pintu lipat (folding bi-fold door) 3 s/d 7 daun, pintu swing minimalis kaca tempered, dan pintu kamar mandi ACP.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Rel atas (top hung) &amp; rel bawah</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Penempatan handle tanam &amp; pull bar</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Peredam suara (weatherstrip)</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Desain Pintu</span> &rarr;
+            </a>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                03
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Kitchen Set Aluminium Anti-Rayap</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Kabinet dapur modern 100% tahan air, anti rayap, dan anti jamur menggunakan rangka aluminium hollow dipadukan panel ACP berkualitas dan kaca backpainted.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Kabinet atas gantung &amp; kabinet bawah</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Detail rak piring &amp; laci slow-motion</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Countertop granit / marmer layout</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Desain Kitchen Set</span> &rarr;
+            </a>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                04
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Partisi Ruangan &amp; Sekat Kaca Kantor</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Penyekat ruangan kantor akustik, partisi kaca tempered frameless / slimline frame aluminium, dan sekat kamar mandi shower box kaca.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Profil slimline minimalis</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Kaca 8mm / 10mm / 12mm tempered</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Pintu patch fitting &amp; floor hinge</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Desain Partisi</span> &rarr;
+            </a>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-purple-950 text-purple-400 border border-purple-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                05
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Plafon Aluminium/PVC, Kanopi &amp; Louver ACP</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Desain rangka plafon hollow aluminium, plafon PVC drop ceiling dengan jalur lampu LED cove, kanopi kaca tempered, serta kisi-kisi fasad ACP.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Denah rangka hollow &amp; drop ceiling LED</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Detail lis wall angle &amp; kisi baffle plafon</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Kanopi kaca &amp; sun shading fasad gedung</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Desain Plafon &amp; Fasad</span> &rarr;
+            </a>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-6 border border-slate-800 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center mb-5 text-xl font-mono-cad font-bold">
+                06
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Shop Drawing Fabrikasi + Cutting List</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                Layanan khusus kontraktor &amp; bengkel las/aluminium: dokumen gambar kerja teknis A3/A4 lengkap dengan daftar potong bahan dan estimasi RAB kebutuhan material.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 mb-6 font-mono-cad">
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Format DWG, DXF &amp; PDF Skala</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Bill of Quantities (BoQ Bahan)</li>
+                <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Siap tender &amp; persetujuan owner</li>
+              </ul>
+            </div>
+            <a href="#pemesanan" class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+              <span>Order Shop Drawing</span> &rarr;
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: PORTOFOLIO & KATALOG DESAIN -->
+    <section id="portofolio" class="py-20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+              Karya Terbaru
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+              Galeri Portofolio &amp; Desain 3D
+            </h2>
+            <p class="text-slate-300 text-sm mt-1">
+              Pilih kategori di bawah ini untuk melihat contoh gambar kerja dan 3D visual yang telah kami selesaikan.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button data-portfolio-filter="semua" class="px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 text-white shadow-md transition-all">
+              Semua Desain
+            </button>
+            <button data-portfolio-filter="kusen" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+              Kusen &amp; Jendela
+            </button>
+            <button data-portfolio-filter="pintu" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+              Pintu Aluminium
+            </button>
+            <button data-portfolio-filter="kitchen" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+              Kitchen Set
+            </button>
+            <button data-portfolio-filter="plafon" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+              Plafon Aluminium/PVC
+            </button>
+            <button data-portfolio-filter="partisi" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-all">
+              Partisi Kaca
+            </button>
+          </div>
+        </div>
+
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered by portfolio-data.js & app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: PAKET HARGA & ESTIMASI BIAYA JASA DESAIN -->
+    <section id="paket-harga" class="py-20 bg-slate-950/60 border-y border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+            Tarif Jasa Transparan
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Pilihan Paket Desain AutoCAD &amp; 3D
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Investasi hemat biaya untuk memastikan pengerjaan mebel, plafon, dan kusen aluminium berjalan mulus tanpa resiko kesalahan.
+          </p>
+        </div>
+
+        <div id="packages-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Rendered by app.js -->
+        </div>
+
+        <div class="mt-12 text-center text-xs sm:text-sm text-slate-400 max-w-xl mx-auto bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+          <p class="font-medium text-sky-300 mb-1">🎁 Diskon Proyek Borongan:</p>
+          Pemesanan di atas 5 unit opening kusen/pintu/ruangan otomatis mendapatkan diskon tambahan 10% pada formulir pemesanan di bawah!
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: ALUR KERJA (CARA PEMESANAN) -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h3 class="text-xl sm:text-2xl font-bold text-white">4 Langkah Mudah Pemesanan Desain</h3>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Proses cepat, fleksibel, dan transparan dari awal hingga serah terima file DWG.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-panel p-5 rounded-xl border border-slate-800 relative">
+            <span class="text-3xl font-black text-sky-500/30 font-mono-cad absolute top-4 right-4">01</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold mb-3 text-sm">1</div>
+            <h4 class="text-sm font-bold text-white mb-1">Isi Form &amp; Kirim Ukuran</h4>
+            <p class="text-xs text-slate-400">Pilih kategori kusen/mebel/plafon di form bawah, masukkan ukuran kasar atau sketsa foto lapangan.</p>
+          </div>
+
+          <div class="glass-panel p-5 rounded-xl border border-slate-800 relative">
+            <span class="text-3xl font-black text-sky-500/30 font-mono-cad absolute top-4 right-4">02</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold mb-3 text-sm">2</div>
+            <h4 class="text-sm font-bold text-white mb-1">Konsultasi Teknis via WA</h4>
+            <p class="text-xs text-slate-400">Diskusi merk profil aluminium (Alexindo, YKK, Dacon), warna finishing, dan bukaan hardware.</p>
+          </div>
+
+          <div class="glass-panel p-5 rounded-xl border border-slate-800 relative">
+            <span class="text-3xl font-black text-sky-500/30 font-mono-cad absolute top-4 right-4">03</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold mb-3 text-sm">3</div>
+            <h4 class="text-sm font-bold text-white mb-1">Drafting 3D &amp; Revisi</h4>
+            <p class="text-xs text-slate-400">Proses penggambaran CAD 2D/3D. Anda diberikan preview untuk revisi jika ada penyesuaian.</p>
+          </div>
+
+          <div class="glass-panel p-5 rounded-xl border border-slate-800 relative">
+            <span class="text-3xl font-black text-sky-500/30 font-mono-cad absolute top-4 right-4">04</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold mb-3 text-sm">4</div>
+            <h4 class="text-sm font-bold text-white mb-1">Serah Terima Berkas Master</h4>
+            <p class="text-xs text-slate-400">Pengiriman Master File .DWG, PDF skala siap print bengkel, gambar 3D render, dan tabel Cutting List.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: FORMULIR PEMESANAN DESAIN INTERAKTIF & KALKULATOR -->
+    <section id="pemesanan" class="py-20 bg-blueprint-subtle border-t border-sky-500/20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/80 border border-sky-500/40 px-3.5 py-1 rounded-full shadow-inner">
+            Kalkulator &amp; Form Pemesanan Online
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mt-4 tracking-tight">
+            Form Pemesanan Desain Kusen, Plafon &amp; Mebel
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Sesuaikan spesifikasi kusen/plafon/mebel aluminium Anda di bawah ini. Kolom ukuran otomatis menyesuaikan kategori pilihan Anda dan dapat langsung dikirim ke WhatsApp resmi kami.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT COLUMN: INTERACTIVE FORM INPUTS -->
+          <div class="lg:col-span-7 glass-panel rounded-2xl p-6 sm:p-8 border border-sky-500/30 cad-corner-box shadow-xl">
+            
+            <form id="order-form" class="space-y-6" onsubmit="return false;">
+              
+              <!-- Step 1 -->
+              <div>
+                <label class="block text-xs font-mono-cad text-sky-300 font-semibold mb-2">
+                  LANGKAH 1: PILIH KATEGORI DESAIN MEBEL / KUSEN
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Kusen Jendela Aluminium" data-cat-key="kusen" checked class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Kusen Jendela Aluminium</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Pintu Aluminium (Sliding / Swing / Folding)" data-cat-key="pintu" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Pintu Aluminium (Sliding/Lipat)</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Kitchen Set Aluminium Modular" data-cat-key="kitchen" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Kitchen Set Aluminium</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Plafon PVC & Aluminium (Drop Ceiling)" data-cat-key="plafon" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Plafon PVC &amp; Aluminium</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Partisi & Sekat Ruangan Kaca" data-cat-key="partisi" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Partisi &amp; Sekat Kantor Kaca</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all">
+                    <input type="radio" name="orderCategory" value="Kanopi & Louver ACP" data-cat-key="kanopi" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Kanopi / Louver ACP</span>
+                  </label>
+                  <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-sky-500 cursor-pointer transition-all sm:col-span-2">
+                    <input type="radio" name="orderCategory" value="Mebel Custom Lainnya" data-cat-key="custom" class="text-sky-500 focus:ring-sky-400">
+                    <span class="text-xs font-medium text-white">Mebel Custom Lainnya (Lemari Pakaian, Rak TV, Meja Kerja Aluminium)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div>
+                <label class="block text-xs font-mono-cad text-sky-300 font-semibold mb-2">
+                  LANGKAH 2: PILIH PAKET OUTPUT DESAIN
+                </label>
+                <div class="space-y-2.5">
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-sky-500 cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="orderPackage" value="pkg-basic" class="text-sky-500 focus:ring-sky-400">
+                      <div>
+                        <span class="text-xs font-bold text-white block">Paket 2D CAD Shop Drawing</span>
+                        <span class="text-[11px] text-slate-400">DWG + PDF Tampak &amp; Detail Potongan Sambungan Profil</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-mono-cad text-slate-300 font-semibold">Rp 150.000/unit</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-sky-950/40 border border-sky-500/50 cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="orderPackage" value="pkg-pro" checked class="text-sky-500 focus:ring-sky-400">
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span class="text-xs font-bold text-white">Paket 3D CAD Visual Render</span>
+                          <span class="text-[10px] bg-sky-500 text-slate-950 font-bold px-1.5 py-0.2 rounded">POPULER</span>
+                        </div>
+                        <span class="text-[11px] text-slate-300">File DWG 2D + 3D Render Realistis 4K Berbagai Sudut</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-mono-cad text-sky-300 font-bold">Rp 250.000/unit</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-sky-500 cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="orderPackage" value="pkg-master" class="text-sky-500 focus:ring-sky-400">
+                      <div>
+                        <span class="text-xs font-bold text-white block">Paket Komplit Fabrikasi + Cutting List + RAB</span>
+                        <span class="text-[11px] text-slate-400">2D + 3D + Optimasi Potong Bahan + Estimasi Biaya RAB Lengkap</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-mono-cad text-slate-300 font-semibold">Rp 400.000/unit</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Merk Profil & Warna Finishing -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="order-brand" class="block text-xs font-mono-cad text-slate-300 font-semibold mb-1.5">
+                    Merk Profil Aluminium
+                  </label>
+                  <select id="order-brand" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <option value="Alexindo (Standar Proyek)" selected>Alexindo (Standar Proyek)</option>
+                    <option value="YKK AP (Grade Premium Jepang)">YKK AP (Grade Premium Jepang)</option>
+                    <option value="Dacon / Inkalum (Ekonomis Berkualitas)">Dacon / Inkalum (Ekonomis Berkualitas)</option>
+                    <option value="Forta / Alcomexindo">Forta / Alcomexindo</option>
+                    <option value="Custom / Minta Rekomendasi Drafter">Belum Tahu (Minta Saran Drafter)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="order-finish" class="block text-xs font-mono-cad text-slate-300 font-semibold mb-1.5">
+                    Warna Finishing Profil
+                  </label>
+                  <select id="order-finish" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    <option value="Hitam Doff (Powder Coating)" selected>Hitam Doff (Black Powder Coat)</option>
+                    <option value="Anodize Silver (Silver Terang)">Anodize Silver (Silver Terang)</option>
+                    <option value="Putih Glossy (White Coating)">Putih Bersih (White Coating)</option>
+                    <option value="Urat Kayu (Woodgrain Cokelat)">Urat Kayu / Woodgrain Natural</option>
+                    <option value="Cokelat Anodize (Dark Brown)">Cokelat Anodize (Dark Brown)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Step 3: Dimensi Ukuran Dinamis -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="block text-xs font-mono-cad text-sky-300 font-semibold">
+                    LANGKAH 3: SPESIFIKASI UKURAN &amp; TEKNIS (<span id="dim-category-badge" class="text-white">KUSEN JENDELA</span>)
+                  </label>
+                </div>
+
+                <div id="dynamic-dimensions-container" class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
+                  <!-- Diisi otomatis oleh js/app.js -->
+                </div>
+
+                <div class="mt-3 flex items-center justify-between bg-slate-900/80 border border-slate-700 rounded-xl px-3.5 py-2.5">
+                  <label for="order-units" id="order-units-label" class="text-xs font-medium text-slate-300">
+                    Jumlah Unit / Opening Jendela:
+                  </label>
+                  <input type="number" id="order-units" value="1" min="1" max="50" class="w-24 bg-slate-950 border border-slate-700 text-sky-300 font-bold rounded-lg px-3 py-1.5 text-xs font-mono-cad text-right focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                </div>
+
+                <p class="text-[11px] text-slate-500 mt-1.5 italic">
+                  *Kolom spesifikasi di atas otomatis menyesuaikan kategori yang Anda pilih pada Langkah 1.
+                </p>
+              </div>
+
+              <!-- Add-on Options -->
+              <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+                <span class="block text-xs font-mono-cad text-slate-400">OPSI TAMBAHAN (OPSIONAL):</span>
+                <label class="flex items-center gap-3 cursor-pointer text-xs text-slate-300">
+                  <input type="checkbox" id="order-addon-fast" class="rounded text-sky-500 focus:ring-sky-400">
+                  <span>🚀 Layanan Prioritas Fast-Track (Selesai dalam 24 Jam) <strong class="text-sky-300 font-mono-cad">+Rp 100.000/unit</strong></span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer text-xs text-slate-300">
+                  <input type="checkbox" id="order-addon-rab" class="rounded text-sky-500 focus:ring-sky-400">
+                  <span>📊 Tambahan Analisa RAB &amp; BoQ Bahan Kaca/Profil <strong class="text-sky-300 font-mono-cad">+Rp 75.000/unit</strong></span>
+                </label>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="space-y-3 pt-2 border-t border-slate-800">
+                <label class="block text-xs font-mono-cad text-sky-300 font-semibold">
+                  LANGKAH 4: DATA DIRI &amp; CATATAN
+                </label>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <input type="text" id="order-customer-name" placeholder="Nama Anda / Nama Perusahaan *" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                  </div>
+                  <div>
+                    <input type="tel" id="order-customer-phone" placeholder="Nomor WhatsApp (Contoh: 0812xxxx) *" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                  </div>
+                </div>
+
+                <div>
+                  <input type="text" id="order-customer-loc" placeholder="Lokasi Proyek / Kota (Contoh: Bandung Barat, Jakarta Selatan)" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                </div>
+
+                <div>
+                  <textarea id="order-customer-notes" rows="3" placeholder="Catatan Tambahan (Misal: ingin model bukaan sliding ke arah kanan, kaca riben 5mm, atau sertakan link foto sketsa kasar tulisan tangan jika ada)..." class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+          <!-- RIGHT COLUMN: LIVE ORDER SUMMARY CARD & WHATSAPP DISPATCH -->
+          <div class="lg:col-span-5 sticky top-28 space-y-4">
+            
+            <div id="order-summary-card" class="glass-panel rounded-2xl p-6 sm:p-7 border border-sky-400/40 shadow-2xl relative overflow-hidden">
+              
+              <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-600"></div>
+
+              <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                <div>
+                  <h3 class="text-base font-bold text-white">Ringkasan Estimasi Pesanan</h3>
+                  <span class="text-[11px] font-mono-cad text-sky-400">MEBELIZE Technical Quotation</span>
+                </div>
+                <span class="font-mono-cad text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700">
+                  DRAFT CAD
+                </span>
+              </div>
+
+              <div class="space-y-3 text-xs font-mono-cad pb-5 border-b border-slate-800">
+                <div class="flex justify-between items-start">
+                  <span class="text-slate-400">Kategori:</span>
+                  <span id="sum-category" class="text-white font-semibold text-right max-w-[200px]">Kusen Jendela Aluminium</span>
+                </div>
+
+                <div class="flex justify-between items-start">
+                  <span class="text-slate-400">Paket:</span>
+                  <span id="sum-package" class="text-sky-300 font-semibold text-right">Paket 3D CAD Visual Render</span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Volume:</span>
+                  <span id="sum-units" class="text-white">1 Unit / Opening</span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Profil:</span>
+                  <span id="sum-brand" class="text-slate-200">Alexindo</span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Finishing:</span>
+                  <span id="sum-finish" class="text-slate-200">Hitam Doff</span>
+                </div>
+
+                <div class="flex justify-between items-start">
+                  <span class="text-slate-400">Spesifikasi:</span>
+                  <span id="sum-dimensions" class="text-slate-200 text-right max-w-[210px]">140 x 160 cm (Kusen 4 Inch)</span>
+                </div>
+
+                <div id="sum-discount-row" class="hidden flex justify-between items-center text-emerald-400 font-bold">
+                  <span>Diskon Volume:</span>
+                  <span id="sum-discount-val">- Rp 0</span>
+                </div>
+              </div>
+
+              <div class="py-5">
+                <div class="flex items-baseline justify-between mb-1">
+                  <span class="text-xs uppercase font-mono-cad text-slate-400">Estimasi Total Biaya:</span>
+                  <span id="sum-total-price" class="text-2xl sm:text-3xl font-black text-sky-400 font-mono-cad">
+                    Rp 250.000
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-400 italic">
+                  *Termasuk file master .DWG, PDF skala, dan hak revisi desain sesuai paket.
+                </p>
+              </div>
+
+              <div class="space-y-3">
+                <button 
+                  id="btn-send-whatsapp"
+                  class="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-sm shadow-xl shadow-emerald-950/60 transition-all flex items-center justify-center gap-3 group"
+                >
+                  <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.073.377-.044c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824zM12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.396C8.423 21.498 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+                  <span>Kirim Pesanan via WhatsApp</span>
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+
+                <button 
+                  id="btn-print-order"
+                  class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition-all flex items-center justify-center gap-2"
+                >
+                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                  <span>Cetak / Simpan Rincian Pesanan (PDF)</span>
+                </button>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Respon Cepat &lt; 15 Menit
+                </span>
+                <span>Garansi Revisi Sampai Cocok</span>
+              </div>
+
+            </div>
+
+            <div class="glass-panel rounded-xl p-4 border border-slate-800 text-xs text-slate-400 flex items-center gap-3">
+              <div class="p-2.5 rounded-lg bg-sky-950 text-sky-400 border border-sky-500/30 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <div>
+                <p class="font-bold text-white mb-0.5">Ingin Konsultasi Langsung Dahulu?</p>
+                <p>Hubungi admin drafter kami untuk tanya-tanya seputar teknis profil &amp; ukuran tanpa biaya.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 8: TESTIMONIALS -->
+    <section id="testimoni" class="py-20 bg-slate-950/60 border-t border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+            Pengalaman Klien
+          </span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mt-4 tracking-tight">
+            Dipercaya Kontraktor, Arsitek &amp; Bengkel
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Inilah apa kata para mitra kerja kami setelah menggunakan berkas desain AutoCAD 3D presisi dari MEBELIZE.
+          </p>
+        </div>
+
+        <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Rendered by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 9: FAQ -->
+    <section id="faq" class="py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+          <span class="text-xs font-mono-cad text-sky-400 uppercase tracking-widest bg-sky-950/70 border border-sky-500/30 px-3 py-1 rounded-full">
+            Bantuan &amp; Informasi
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-4 tracking-tight">
+            Pertanyaan yang Sering Diajukan (FAQ)
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">Jawaban seputar teknis gambar kerja, format file, dan proses pemesanan.</p>
+        </div>
+
+        <div id="faq-accordion" class="space-y-4">
+          <!-- Rendered by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 10: CTA BANNER SEBELUM FOOTER -->
+    <section class="py-16 bg-gradient-to-r from-sky-950 via-blue-950 to-slate-950 border-t border-sky-500/30 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+          Siap Mewujudkan Desain Kusen, Plafon &amp; Mebel Aluminium Tanpa Resiko Salah Potong?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-8">
+          Kirimkan ukuran perkiraan atau denah ruangan Anda sekarang. Tim drafter AutoCAD profesional kami siap membantu menghasilkan gambar kerja presisi milimeter.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#pemesanan" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-sm shadow-xl shadow-sky-600/30 transition-all">
+            Buka Form Pemesanan
+          </a>
+          <a href="https://wa.me/6281234567890?text=Halo%20MEBELIZE,%20saya%20mau%20konsultasi%20desain%203D%20kusen%20aluminium" target="_blank" class="px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
+            <span>Chat Langsung via WhatsApp</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 flex items-center justify-center bg-slate-900 rounded-xl border border-sky-500/40 p-1">
+              <img src="assets/logo.svg" alt="MEBELIZE Logo" class="w-full h-full object-contain">
+            </div>
+            <span class="text-xl font-black text-white">MEBEL<span class="text-sky-400">IZE</span></span>
+          </div>
+          <p class="leading-relaxed">
+            Studio jasa desain 3D AutoCAD dan gambar kerja teknis (shop drawing) mebel, plafon, &amp; kusen aluminium presisi. Membantu bengkel, arsitek, dan pemilik rumah di seluruh Indonesia.
+          </p>
+          <div class="text-[11px] font-mono-cad text-sky-400">
+            FORMAT: .DWG | .DXF | .PDF | .OBJ | .SKP
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider font-mono-cad">Navigasi Halaman</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#beranda" class="hover:text-sky-400 transition-colors">Beranda Utama</a></li>
+            <li><a href="#tentang-toko" class="hover:text-sky-400 transition-colors">Latar Belakang &amp; Profil Toko</a></li>
+            <li><a href="#cad-preview" class="hover:text-sky-400 transition-colors">Simulasi 3D CAD Interaktif</a></li>
+            <li><a href="#kitchen-studio" class="hover:text-sky-400 transition-colors">Studio Desain 3D Kitchen Set</a></li>
+            <li><a href="#layanan" class="hover:text-sky-400 transition-colors">Katalog Layanan Kusen &amp; Mebel</a></li>
+            <li><a href="#portofolio" class="hover:text-sky-400 transition-colors">Portofolio Desain</a></li>
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Form Pemesanan &amp; Kalkulator</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider font-mono-cad">Kategori Desain</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Kusen Jendela Casement &amp; Sliding</a></li>
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Pintu Lipat (Folding) Aluminium</a></li>
+            <li><a href="#kitchen-studio" class="hover:text-sky-400 transition-colors">Kitchen Set Anti Rayap ACP</a></li>
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Plafon PVC &amp; Rangka Hollow Aluminium</a></li>
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Partisi Kantor Akustik Kaca</a></li>
+            <li><a href="#pemesanan" class="hover:text-sky-400 transition-colors">Optimasi Cutting List &amp; RAB</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider font-mono-cad">Kontak Workshop</h4>
+          <p class="flex items-start gap-2">
+            <span class="text-sky-400">📍</span>
+            <span>Workshop &amp; Studio Desain: Melayani Seluruh Indonesia (Pengiriman File Online)</span>
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="text-emerald-400">📱</span>
+            <span class="font-mono-cad text-slate-300">WhatsApp: +62 812-3456-7890</span>
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="text-sky-400">🕒</span>
+            <span>Senin - Sabtu: 08.00 - 18.00 WIB</span>
+          </p>
+          <div class="pt-2">
+            <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 font-semibold">
+              <span>Chat CS WhatsApp Sekarang</span> &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <p>&copy; 2026 MEBELIZE. Seluruh hak cipta dilindungi undang-undang.</p>
+        <p class="font-mono-cad">Autodesk AutoCAD &amp; Architectural Engineering Standards</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a 
+    href="https://wa.me/6281234567890?text=Halo%20Admin%20MEBELIZE,%20saya%20ingin%20konsultasi%20desain%203D%20kusen%20dan%20mebel%20aluminium." 
+    target="_blank" 
+    class="fixed bottom-6 right-6 z-50 p-3.5 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full shadow-2xl shadow-emerald-950/80 transition-all hover:scale-110 flex items-center gap-2 group"
+    aria-label="Hubungi kami di WhatsApp"
+  >
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.073.377-.044c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824zM12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.396C8.423 21.498 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 font-semibold text-xs pr-1">
+      Chat Konsultasi
+    </span>
+  </a>
+
+  <!-- SCRIPTS -->
+  <script src="js/portfolio-data.js"></script>
+  <script src="js/cad-viewer.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

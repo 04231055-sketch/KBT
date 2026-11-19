@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Icon: 3D Isometric Aluminum Frame & Blueprint Dimension Lines -->
+  <g transform="translate(15, 10)">
+    <!-- Isometric Cube / Kusen Section -->
+    <!-- Top Face -->
+    <polygon points="40,10 75,27 40,44 5,27" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Left Face -->
+    <polygon points="5,27 40,44 40,75 5,58" fill="#1e3a8a" fill-opacity="0.8" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Right Face -->
+    <polygon points="40,44 75,27 75,58 40,75" fill="#1d4ed8" fill-opacity="0.5" stroke="#38bdf8" stroke-width="2"/>
+    
+    <!-- Inner Hollow (Aluminum Profile Chamber) -->
+    <polygon points="40,20 62,31 40,41 18,31" fill="#0f172a" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <polygon points="18,31 40,41 40,63 18,52" fill="#0f172a" stroke="#60a5fa" stroke-width="1.5"/>
+    <polygon points="40,41 62,31 62,52 40,63" fill="#0b1329" stroke="#60a5fa" stroke-width="1.5"/>
+
+    <!-- CAD Dimension markers -->
+    <path d="M 0,27 L 0,60" stroke="#f59e0b" stroke-width="1.5"/>
+    <line x1="-3" y1="27" x2="3" y2="27" stroke="#f59e0b" stroke-width="1.5"/>
+    <line x1="-3" y1="60" x2="3" y2="60" stroke="#f59e0b" stroke-width="1.5"/>
+
+    <!-- Sparkle/Precision Node -->
+    <circle cx="40" cy="44" r="3" fill="#f59e0b" filter="url(#glow)"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="105" y="48" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="800" font-size="28" fill="#ffffff" letter-spacing="-0.5">
+    MEBEL<tspan fill="#38bdf8">IZE</tspan>
+  </text>
+  <text x="105" y="70" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="600" font-size="11" fill="#94a3b8" letter-spacing="2">
+    DESAIN 3D KUSEN &amp; MEBEL ALUMINIUM
+  </text>
+</svg>
+
